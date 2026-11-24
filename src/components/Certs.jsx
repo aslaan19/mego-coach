@@ -19,7 +19,7 @@ export default function Certs() {
         </div>
         <ul className="credential-list">
           {credentials.map(({ code, role, issuer }) => (
-            <li key={code}>
+            <li key={code} data-reveal>
               <span className="credential-code" dir="ltr">{code}</span>
               <div>
                 <h3>{t(...role)}</h3>

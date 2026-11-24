@@ -10,7 +10,7 @@ export default function Program({ program }) {
     <article className="program-page">
       <div className="program-cover">
         <div className="wrap program-cover-inner">
-          <div className="program-intro">
+          <div className="program-intro" data-reveal>
             <a className="back-link" href="./#services">{t('All coaching programs', 'كل برامج التدريب')}</a>
             <p className="eyebrow">{t(...mode)}</p>
             <h1 className="display-heading">{t(...name)}</h1>
@@ -24,13 +24,13 @@ export default function Program({ program }) {
       </div>
       <section className="program-brief">
         <div className="wrap brief-inner">
-          <div className="program-includes">
+          <div className="program-includes" data-reveal>
             <h2>{t('Included in your program', 'يشمل برنامجك')}</h2>
             <ul>{details.map(item => <li key={item[0]}>{t(...item)}</li>)}</ul>
           </div>
           <div className="program-notes">
             {focus.map(([title, body, arTitle, arBody]) => (
-              <section key={title}>
+              <section key={title} data-reveal>
                 <h2>{t(title, arTitle)}</h2>
                 <p>{t(body, arBody)}</p>
               </section>

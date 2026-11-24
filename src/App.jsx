@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import VisitIntro from './components/VisitIntro'
+import useSectionMotion from './useSectionMotion'
 import { programs } from './programs'
 import Program from './components/Program'
 import { LangProvider, useLang } from './context/LangContext'
@@ -12,6 +14,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function Page() {
+  useSectionMotion()
   const { isAr, t } = useLang()
   const id = new URLSearchParams(window.location.search).get('program')
   const program = programs.find(item => item.id === id)
@@ -30,6 +33,7 @@ function Page() {
   return (
     <>
       <a className="skip-link" href="#main">{t('Skip to content', 'انتقل إلى المحتوى')}</a>
+      <VisitIntro />
       <Header />
       <main id="main" tabIndex={-1}>
         {program ? <Program program={program} /> : (

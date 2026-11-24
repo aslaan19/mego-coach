@@ -8,13 +8,13 @@ export default function Services() {
   return (
     <section id="services" className="services section-padding" tabIndex={-1} aria-labelledby="services-title">
       <div className="wrap">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="eyebrow">{t('Coaching programs', 'برامج التدريب')}</p>
           <h2 id="services-title" className="display-heading">{t('FIND YOUR PROGRAM.', 'اختر برنامجك.')}</h2>
           <p>{t('Build muscle, improve your lifts, or get ready for the stage.', 'ابنِ عضلاتك، وطوّر أداءك في التمرين، أو استعد للمنافسة.')}</p>
         </div>
 
-        <div className="service-grid">
+        <div className="service-grid" data-reveal>
           {programs.map(({ id, photo, mode, name, summary, details, message }, index) => (
             <details className="service" name="coaching-program" key={name[0]} open={index === 0}>
               <summary>

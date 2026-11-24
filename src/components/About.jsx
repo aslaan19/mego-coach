@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section id="about" className="about" tabIndex={-1} aria-labelledby="about-title">
       <div className="wrap about-inner">
-        <figure className="about-photo">
+        <figure className="about-photo" data-reveal>
           <img
             className="profile-training"
             src="/mego-training.webp"
@@ -19,7 +19,7 @@ export default function About() {
           <img className="profile-stage" src="/mego-stage.webp" width="628" height="830" loading="lazy" alt={t('MEGO at a physique competition', 'ميجو في مسابقة فيزيك')} />
           <figcaption>{t('Training & competition', 'من النادي والمنافسات')}</figcaption>
         </figure>
-        <div className="about-copy">
+        <div className="about-copy" data-reveal>
           <p className="eyebrow">{t('Meet your coach', 'تعرّف على مدربك')}</p>
           <h2 id="about-title" className="display-heading">
             <span>{t('MOHAMED', 'محمد')}</span>

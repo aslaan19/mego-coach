@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="wrap">
-        <div className="footer-main">
+        <div className="footer-main" data-reveal>
           <div className="footer-brand">
             <a href="./#hero" className="wordmark" aria-label={t('MEGO home', 'ميجو، الرئيسية')} dir="ltr">MEGO<span>.</span></a>
             <p>{t('Physique coaching in Riyadh', 'تدريب فيزيك في الرياض')}</p>
