@@ -1,39 +1,14 @@
-# MEGO — Physique Coach Website
+# MEGO Physique Coaching
 
-## Setup
+A bilingual React and Vite website for Coach MEGO in Riyadh.
 
-```bash
-npm install
+## Run locally
+
+```sh
+npm ci
 npm run dev
 ```
 
-## Before Going Live — Checklist
+Use `npm run build` to create the production site in `dist/`, and `npm run preview` to preview it.
 
-### 1. Add Your Logo
-Copy your MEGO logo as `public/logo.png`
-
-### 2. Add Your Training Videos
-In `src/components/Hero.jsx`, replace the placeholder divs with:
-```jsx
-<video src="/videos/video1.mp4" autoPlay muted loop playsInline />
-```
-Place video files in `public/videos/`.
-
-### 3. Add Your Photo
-In `src/components/About.jsx`, replace the placeholder with:
-```jsx
-<img src="/coach-photo.jpg" alt="Coach MEGO" />
-```
-Place the photo as `public/coach-photo.jpg`.
-
-### 4. Update Social Follower Counts
-In `src/components/Stats.jsx`, update `target` values to your current follower counts.
-
-## Deploy to Vercel / Netlify
-
-```bash
-npm run build
-# → uploads the "dist/" folder
-```
-
-Or push to GitHub and connect Vercel — it auto-detects Vite.
+The site uses the original competition photograph in `public/mego1.png` and training reel in `public/video1.mp4`. The WebP images use the original portrait and a still from the training reel. Coaching and contact copy lives in the relevant components, with the booking number and social links in `src/site.js`.

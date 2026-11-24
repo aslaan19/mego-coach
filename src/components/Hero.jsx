@@ -1,141 +1,82 @@
-import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useLang } from '../context/LangContext'
 
-const TOTAL    = 3
-const INTERVAL = 5000
-
-function PlayIcon() {
-  return (
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1">
-      <circle cx="12" cy="12" r="10" />
-      <polygon points="10 8 16 12 10 16 10 8" fill="white" stroke="none" />
-    </svg>
-  )
-}
-
 export default function Hero() {
-  const { isAr } = useLang()
-  const [slide, setSlide]     = useState(0)
-  const [soundOn, setSoundOn] = useState(false)
-  const timerRef              = useRef(null)
+  const { t } = useLang()
+  const dialog = useRef(null)
+  const video = useRef(null)
+  const trigger = useRef(null)
 
-  const t = (en, ar) => isAr ? ar : en
-
-  const getAllVideos = () =>
-    Array.from(document.querySelectorAll('.video-slot video'))
-
-  const startTimer = () => {
-    clearInterval(timerRef.current)
-    timerRef.current = setInterval(() => setSlide(s => (s + 1) % TOTAL), INTERVAL)
+  function playFilm() {
+    dialog.current.showModal()
+    video.current.play().catch(() => {})
   }
 
-  const toggleSound = () => {
-    const next = !soundOn
-    setSoundOn(next)
-    getAllVideos().forEach(v => {
-      v.muted = !next
-      if (!next) return
-      /* browsers block unmuted autoplay — play() re-triggers permission */
-      v.play().catch(() => {
-        v.muted = true
-        setSoundOn(false)
-      })
-    })
+  function onFilmClose() {
+    video.current.pause()
+    trigger.current.focus()
   }
-
-  const goSlide = (n) => {
-    setSlide(n)
-    startTimer()
-  }
-
-  useEffect(() => {
-    startTimer()
-    return () => clearInterval(timerRef.current)
-  }, [])
 
   return (
-    <section id="hero">
-      {/* ── Video reel ── */}
-      <div className="video-reel">
-        {Array.from({ length: TOTAL }, (_, i) => (
-          <div key={i} className={`video-slot${slide === i ? ' active' : ''}`}>
+    <section id="hero" className="hero" aria-labelledby="hero-title">
+      <div className="wrap hero-inner">
+        <div className="hero-visual">
+          <span className="hero-background-type" aria-hidden="true" dir="ltr">MEGO</span>
+          <img
+            className="hero-portrait"
+            src="/mego-portrait.webp"
+            width="628"
+            height="830"
+            fetchPriority="high"
+            alt={t('Coach MEGO in his physique competition attire', 'المدرب ميجو بملابس مسابقة الفيزيك')}
+          />
+        </div>
 
-              <video src="/video1.mp4" autoPlay muted loop playsInline />
-           
-            <div className="video-placeholder">
-              <PlayIcon />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="hero-overlay" />
-
-      {/* ── Hero content ── */}
-      <div className="hero-content">
-        <div className="hero-text">
-          <span className="hero-eyebrow">
-            {t(
-              'CERTIFIED PHYSIQUE COACH · RIYADH, KSA',
-              'مدرب شخصي معتمد · الرياض، المملكة العربية السعودية'
-            )}
-          </span>
-
-          <h1
-            className="hero-title"
-            style={{ fontFamily: isAr ? "'Tajawal', sans-serif" : "'Bebas Neue', sans-serif" }}
-          >
-            {isAr ? (
-              <>ابنِ<br />جسدك<br /><span>الآن.</span></>
-            ) : (
-              <>BUILD THE<br />BODY YOU<br /><span>DESERVE.</span></>
-            )}
+        <div className="hero-copy">
+          <p className="eyebrow">{t('Physique coaching · Riyadh, KSA', 'تدريب فيزيك · الرياض، السعودية')}</p>
+          <h1 id="hero-title" className="hero-title">
+            <span>{t('BUILD YOUR', 'ابنِ جسمًا')}</span>
+            <span>{t('STRONGEST', 'أقوى')}</span>
+            <em>{t('PHYSIQUE.', 'مع ميجو.')}</em>
           </h1>
-
-          <p className="hero-sub">
+          <p className="hero-description">
             {t(
-              'Science-based training. Personalized nutrition. Real results.',
-              'تدريب مبني على العلم. تغذية مخصصة. نتائج حقيقية.'
+              'Train with Mohamed “MEGO” Abd Al Mageid. Personal coaching, a clear training plan, and nutrition built around your goals.',
+              'تدرّب مع محمد «ميجو» عبد المجيد. تدريب شخصي، وخطة تمرين واضحة، وتغذية تناسب أهدافك.'
             )}
           </p>
-        </div>
-
-        {/* ── Controls ── */}
-        <div className="hero-controls">
-          <button className="sound-btn" onClick={toggleSound}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              {soundOn ? (
-                <>
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                </>
-              ) : (
-                <>
-                  <line x1="23" y1="9" x2="17" y2="15" />
-                  <line x1="17" y1="9" x2="23" y2="15" />
-                </>
-              )}
-            </svg>
-            <span>{soundOn ? 'SOUND ON' : 'SOUND OFF'}</span>
-          </button>
-
-          <div className="reel-dots">
-            {Array.from({ length: TOTAL }, (_, i) => (
-              <div
-                key={i}
-                className={`reel-dot${slide === i ? ' active' : ''}`}
-                onClick={() => goSlide(i)}
-              />
-            ))}
+          <div className="hero-actions">
+            <a className="button button--primary" href="#contact">{t('Book coaching', 'احجز تدريبك')}</a>
+            <button ref={trigger} className="film-button" type="button" onClick={playFilm}>
+              <span className="play-icon" aria-hidden="true" />
+              {t('Watch training reel', 'شاهد فيديو التدريب')}
+            </button>
           </div>
         </div>
+
+        <div className="hero-credit" aria-hidden="true">
+          <span className="credit-mark" />
+          <strong>{t('COACH MEGO', 'المدرب ميجو')}</strong>
+          <span>{t('Physique athlete', 'رياضي فيزيك')}</span>
+        </div>
       </div>
 
-      <div className="scroll-hint">
-        <span>SCROLL</span>
-        <div className="scroll-line" />
-      </div>
+      <dialog className="film-dialog" ref={dialog} onClose={onFilmClose} aria-labelledby="film-title">
+        <div className="film-heading">
+          <h2 id="film-title">{t('MEGO training reel', 'فيديو تدريب ميجو')}</h2>
+          <button type="button" onClick={() => dialog.current.close()}>{t('Close', 'إغلاق')}</button>
+        </div>
+        <video
+          ref={video}
+          src="/video1.mp4"
+          controls
+          playsInline
+          preload="none"
+          aria-label={t('MEGO training reel', 'فيديو تدريب ميجو')}
+        >
+          <a href="/video1.mp4">{t('Download the training reel', 'حمّل فيديو التدريب')}</a>
+        </video>
+      </dialog>
     </section>
   )
 }

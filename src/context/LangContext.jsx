@@ -1,21 +1,37 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-const LangContext = createContext({ isAr: false, toggle: () => {} })
+const LangContext = createContext()
+const languageKey = 'mego-language'
+
+function getInitialLanguage() {
+  try {
+    return localStorage.getItem(languageKey) === 'ar'
+  } catch {
+    return false
+  }
+}
 
 export function LangProvider({ children }) {
-  const [isAr, setIsAr] = useState(false)
+  const [isAr, setIsAr] = useState(getInitialLanguage)
+  const t = (en, ar) => isAr ? ar : en
 
-  const toggle = useCallback(() => {
-    setIsAr(prev => {
-      const next = !prev
-      document.documentElement.dir = next ? 'rtl' : 'ltr'
-      document.documentElement.lang = next ? 'ar' : 'en'
-      return next
-    })
-  }, [])
+  useEffect(() => {
+    const language = isAr ? 'ar' : 'en'
+    document.documentElement.lang = language
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr'
+    document.title = isAr
+      ? 'ميجو | مدرب فيزيك في الرياض'
+      : 'MEGO | Physique Coaching in Riyadh'
+
+    try {
+      localStorage.setItem(languageKey, language)
+    } catch {
+      // Language switching still works when storage is unavailable.
+    }
+  }, [isAr])
 
   return (
-    <LangContext.Provider value={{ isAr, toggle }}>
+    <LangContext.Provider value={{ isAr, t, toggle: () => setIsAr(current => !current) }}>
       {children}
     </LangContext.Provider>
   )

@@ -1,4 +1,4 @@
-import { LangProvider } from './context/LangContext'
+import { LangProvider, useLang } from './context/LangContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
@@ -8,19 +8,26 @@ import Certs from './components/Certs'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
-export default function App() {
+function Page() {
+  const { t } = useLang()
+
   return (
-    <LangProvider>
+    <>
+      <a className="skip-link" href="#main">{t('Skip to content', 'انتقل إلى المحتوى')}</a>
       <Header />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
         <Stats />
-        <About />
         <Services />
+        <About />
         <Certs />
         <Contact />
       </main>
       <Footer />
-    </LangProvider>
+    </>
   )
+}
+
+export default function App() {
+  return <LangProvider><Page /></LangProvider>
 }
