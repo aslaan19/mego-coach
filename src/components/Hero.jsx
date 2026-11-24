@@ -68,6 +68,7 @@ export default function Hero() {
         <video
           ref={video}
           src="/video1.mp4"
+          poster="/mego-training.webp"
           controls
           playsInline
           preload="none"

@@ -19,10 +19,6 @@ export function LangProvider({ children }) {
     const language = isAr ? 'ar' : 'en'
     document.documentElement.lang = language
     document.documentElement.dir = isAr ? 'rtl' : 'ltr'
-    document.title = isAr
-      ? 'ميجو | مدرب فيزيك في الرياض'
-      : 'MEGO | Physique Coaching in Riyadh'
-
     try {
       localStorage.setItem(languageKey, language)
     } catch {

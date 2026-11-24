@@ -14,8 +14,8 @@ export default function Certs() {
     <section id="certs" className="credentials section-padding" tabIndex={-1} aria-labelledby="certs-title">
       <div className="wrap credential-layout">
         <div className="section-heading">
-          <p className="eyebrow">{t('Credentials', 'المؤهلات')}</p>
-          <h2 id="certs-title" className="display-heading">{t('TRAIN WITH A CERTIFIED COACH.', 'تدرّب مع مدرب معتمد.')}</h2>
+          <p className="eyebrow">{t('Coach MEGO', 'المدرب ميجو')}</p>
+          <h2 id="certs-title" className="display-heading">{t('QUALIFICATIONS.', 'المؤهلات المهنية.')}</h2>
         </div>
         <ul className="credential-list">
           {credentials.map(({ code, role, issuer }) => (
@@ -25,6 +25,7 @@ export default function Certs() {
                 <h3>{t(...role)}</h3>
                 <p lang="en" dir="ltr">{issuer}</p>
               </div>
+              <span className="credential-kind">{code === 'MBA' ? t('Graduate degree', 'درجة علمية') : t('Certification', 'شهادة مهنية')}</span>
             </li>
           ))}
         </ul>

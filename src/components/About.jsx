@@ -8,6 +8,7 @@ export default function About() {
       <div className="wrap about-inner">
         <figure className="about-photo">
           <img
+            className="profile-training"
             src="/mego-training.webp"
             width="360"
             height="322"
@@ -15,7 +16,8 @@ export default function About() {
             decoding="async"
             alt={t('Coach MEGO training on a cable machine', 'المدرب ميجو يتمرّن على جهاز الكابل')}
           />
-          <figcaption>{t('MEGO in the gym', 'ميجو في النادي')}</figcaption>
+          <img className="profile-stage" src="/mego-stage.webp" width="628" height="830" loading="lazy" alt={t('MEGO at a physique competition', 'ميجو في مسابقة فيزيك')} />
+          <figcaption>{t('Training & competition', 'من النادي والمنافسات')}</figcaption>
         </figure>
         <div className="about-copy">
           <p className="eyebrow">{t('Meet your coach', 'تعرّف على مدربك')}</p>
@@ -35,6 +37,10 @@ export default function About() {
               'أنقل خبرتي في النادي وعلى منصة المنافسات إلى كل خطة تدريبية. نبدأ من مستواك الحالي، ونحدّد هدفًا واضحًا، ثم نعدّل تدريبك وتغذيتك مع تقدّمك.'
             )}
           </p>
+          <dl className="profile-facts">
+            <div><dt>{t('Based in', 'مقر التدريب')}</dt><dd>{t('Riyadh, KSA', 'الرياض، السعودية')}</dd></div>
+            <div><dt>{t('Specialty', 'التخصص')}</dt><dd>{t('Physique coaching', 'تدريب الفيزيك')}</dd></div>
+          </dl>
           <a className="text-link" href="#certs">{t('See my credentials', 'اطّلع على شهاداتي')}</a>
         </div>
       </div>

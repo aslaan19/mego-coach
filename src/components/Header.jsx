@@ -23,12 +23,12 @@ export default function Header() {
   return (
     <header className="site-header" onKeyDown={handleEscape}>
       <div className="wrap header-inner">
-        <a href="#hero" className="wordmark" aria-label={t('MEGO home', 'ميجو، الرئيسية')} dir="ltr">
+        <a href="./#hero" className="wordmark" aria-label={t('MEGO home', 'ميجو، الرئيسية')} dir="ltr">
           MEGO<span>.</span>
         </a>
 
         <nav className="desktop-nav" aria-label={t('Main navigation', 'القائمة الرئيسية')}>
-          {navigation.map(({ href, en, ar }) => <a key={href} href={href}>{t(en, ar)}</a>)}
+          {navigation.map(({ href, en, ar }) => <a key={href} href={`./${href}`}>{t(en, ar)}</a>)}
         </nav>
 
         <div className="header-actions">
@@ -55,9 +55,9 @@ export default function Header() {
       <nav id="mobile-nav" className="mobile-nav" aria-label={t('Main navigation', 'القائمة الرئيسية')} hidden={!menuOpen}>
         <div className="wrap mobile-nav-inner">
           {navigation.map(({ href, en, ar }) => (
-            <a key={href} href={href} onClick={followMenuLink}>{t(en, ar)}</a>
+            <a key={href} href={`./${href}`} onClick={followMenuLink}>{t(en, ar)}</a>
           ))}
-          <a href="#contact" onClick={followMenuLink}>{t('Book coaching', 'احجز تدريبك')}</a>
+          <a href="./#contact" onClick={followMenuLink}>{t('Book coaching', 'احجز تدريبك')}</a>
         </div>
       </nav>
     </header>

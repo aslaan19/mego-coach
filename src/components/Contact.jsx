@@ -1,22 +1,30 @@
+import { useState } from 'react'
 import { useLang } from '../context/LangContext'
-import { generalInquiry, phone } from '../site'
+import { programs } from '../programs'
+import { bookingUrl, generalInquiry, phone } from '../site'
 
 export default function Contact() {
   const { t } = useLang()
+  const [programId, setProgramId] = useState('')
+  const program = programs.find(item => item.id === programId)
+  const link = program ? bookingUrl(t(...program.message)) : generalInquiry(t)
 
   return (
     <section id="contact" className="contact" tabIndex={-1} aria-labelledby="contact-title">
       <div className="wrap contact-inner">
-        <div>
-          <p className="eyebrow">{t('Book coaching', 'احجز تدريبك')}</p>
-          <h2 id="contact-title" className="display-heading">{t('LET’S GET TO WORK.', 'خلّنا نبدأ.')}</h2>
-          <p>{t('Tell me what you want to work on. We’ll figure out which program fits.', 'أخبرني عن هدفك، ونختار معًا البرنامج الذي يناسبك.')}</p>
+        <div className="contact-copy">
+          <p className="eyebrow">{t('Coaching enquiries', 'استفسارات التدريب')}</p>
+          <h2 id="contact-title" className="display-heading">{t('TALK TO MEGO.', 'تواصل مع ميجو.')}</h2>
+          <p>{t('Tell me where you train and what you want to work on. We’ll take it from there.', 'قل لي أين تتمرّن وما الذي تريد تطويره، ونختار الخطوة القادمة معًا.')}</p>
         </div>
-        <div className="contact-action">
-          <a className="button button--dark" href={generalInquiry(t)} target="_blank" rel="noopener noreferrer">
-            {t('Message MEGO on WhatsApp', 'راسل ميجو على واتساب')}
-          </a>
-          <bdi dir="ltr">{phone}</bdi>
+        <div className="booking-card">
+          <label htmlFor="booking-program">{t('Which program interests you?', 'أي برنامج يهمّك؟')}</label>
+          <select id="booking-program" value={programId} onChange={event => setProgramId(event.target.value)}>
+            <option value="">{t('Help me choose', 'ساعدني في الاختيار')}</option>
+            {programs.map(item => <option key={item.id} value={item.id}>{t(...item.name)}</option>)}
+          </select>
+          <a className="button button--dark" href={link} target="_blank" rel="noopener noreferrer">{t('Message MEGO on WhatsApp', 'راسل ميجو على واتساب')}</a>
+          <a className="booking-phone" href="tel:+966500176066"><bdi dir="ltr">{phone}</bdi></a>
         </div>
       </div>
     </section>
