@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useLang } from '../context/LangContext'
-import { navigation } from '../site'
+import { generalInquiry, navigation } from '../site'
 
 export default function Header() {
   const { isAr, t, toggle } = useLang()
@@ -35,8 +35,8 @@ export default function Header() {
           <button className="language-button" type="button" onClick={toggle} lang={isAr ? 'en' : 'ar'}>
             {t('عربي', 'English')}
           </button>
-          <a className="button button--outline header-book" href="#contact">
-            {t('Book coaching', 'احجز تدريبك')}
+          <a className="button button--outline header-book" href={generalInquiry(t)} target="_blank" rel="noopener noreferrer">
+            {t('WhatsApp', 'واتساب')}
           </a>
           <button
             ref={menuButton}

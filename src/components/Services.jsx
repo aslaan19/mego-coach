@@ -59,22 +59,27 @@ export default function Services() {
         </div>
 
         <div className="service-grid">
-          {services.map(({ mode, name, summary, details, message }) => (
-            <article className="service" key={name[0]}>
-              <p className="service-mode">{t(...mode)}</p>
-              <h3>{t(...name)}</h3>
-              <p className="service-summary">{t(...summary)}</p>
-              <ul>{details.map(detail => <li key={detail[0]}>{t(...detail)}</li>)}</ul>
-              <a
-                className="button button--outline"
-                href={bookingUrl(t(...message))}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t('Ask about ' + name[0].toLowerCase() + ' on WhatsApp', 'استفسر عن ' + name[1] + ' على واتساب')}
-              >
-                {t('Ask about this program', 'استفسر عن البرنامج')}
-              </a>
-            </article>
+          {services.map(({ mode, name, summary, details, message }, index) => (
+            <details className="service" name="coaching-program" key={name[0]} open={index === 0}>
+              <summary>
+                <span className="service-mode">{t(...mode)}</span>
+                <span className="service-name">{t(...name)}</span>
+                <span className="service-toggle" aria-hidden="true" />
+              </summary>
+              <div className="service-body">
+                <p className="service-summary">{t(...summary)}</p>
+                <ul>{details.map(detail => <li key={detail[0]}>{t(...detail)}</li>)}</ul>
+                <a
+                  className="button button--outline"
+                  href={bookingUrl(t(...message))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t('Ask about ' + name[0].toLowerCase() + ' on WhatsApp', 'استفسر عن ' + name[1] + ' على واتساب')}
+                >
+                  {t('Ask MEGO on WhatsApp', 'اسأل ميجو على واتساب')}
+                </a>
+              </div>
+            </details>
           ))}
         </div>
       </div>

@@ -33,20 +33,19 @@ export default function Hero() {
         </div>
 
         <div className="hero-copy">
-          <p className="eyebrow">{t('Physique coaching · Riyadh, KSA', 'تدريب فيزيك · الرياض، السعودية')}</p>
+          <p className="eyebrow">{t('Mohamed Abd Al Mageid · Riyadh', 'محمد عبد المجيد · الرياض')}</p>
           <h1 id="hero-title" className="hero-title">
-            <span>{t('BUILD YOUR', 'ابنِ جسمًا')}</span>
-            <span>{t('STRONGEST', 'أقوى')}</span>
-            <em>{t('PHYSIQUE.', 'مع ميجو.')}</em>
+            <span>{t('PHYSIQUE', 'تدريب')}</span>
+            <em>{t('COACHING.', 'فيزيك.')}</em>
           </h1>
           <p className="hero-description">
             {t(
-              'Train with Mohamed “MEGO” Abd Al Mageid. Personal coaching, a clear training plan, and nutrition built around your goals.',
-              'تدرّب مع محمد «ميجو» عبد المجيد. تدريب شخصي، وخطة تمرين واضحة، وتغذية تناسب أهدافك.'
+              'Train with me in Riyadh, or follow a personal lifting plan with weekly online check-ins.',
+              'تدرّب معي في الرياض، أو اتبع خطة تمارين مخصصة مع متابعة أسبوعية عن بُعد.'
             )}
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#contact">{t('Book coaching', 'احجز تدريبك')}</a>
+            <a className="button button--primary" href="#services">{t('Explore programs', 'تصفّح البرامج')}</a>
             <button ref={trigger} className="film-button" type="button" onClick={playFilm}>
               <span className="play-icon" aria-hidden="true" />
               {t('Watch training reel', 'شاهد فيديو التدريب')}

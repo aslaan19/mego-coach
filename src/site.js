@@ -12,6 +12,13 @@ export const socials = [
 
 export const phone = '+966 50 017 6066'
 
+export function generalInquiry(t) {
+  return bookingUrl(t(
+    'Hi Coach MEGO, I’d like to talk about coaching and which program would fit my goals.',
+    'مرحبًا كوتش ميجو، أود معرفة البرنامج التدريبي الأنسب لأهدافي.'
+  ))
+}
+
 export function bookingUrl(message) {
   return 'https://wa.me/966500176066?text=' + encodeURIComponent(message)
 }
